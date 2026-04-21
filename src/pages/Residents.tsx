@@ -9,23 +9,67 @@ export default function Residents() {
   const residents = (users.data ?? []).filter((u: any) => u.role === 'MORADOR');
 
   return (
-    <div>
-      <h1 className="font-display text-3xl mb-6">Moradores</h1>
-      <div className="card divide-y divide-border">
-        {residents.map((u: any) => (
-          <div key={u.id} className="p-4 flex items-center justify-between">
-            <div>
-              <div className="font-medium">{u.name}</div>
-              <div className="text-xs text-muted">
-                {u.email} • {u.phone ?? 'sem telefone'}
-              </div>
-            </div>
-            <div className="text-sm text-muted">
-              {u.unit ? `${u.unit.block ? 'Bl ' + u.unit.block + ' • ' : ''}Ap ${u.unit.number}` : 'sem unidade'}
-            </div>
-          </div>
-        ))}
-        {!residents.length && <div className="p-6 text-sm text-muted">Nenhum morador cadastrado.</div>}
+    <div className="flex flex-col gap-5">
+      <div>
+        <div className="ru-display">Moradores</div>
+        <div className="text-ink-600 mt-1">Usuários vinculados a unidades do condomínio.</div>
+      </div>
+
+      <div className="ru-card overflow-hidden">
+        <table className="ru-table">
+          <thead>
+            <tr>
+              <th>Morador</th>
+              <th>Contato</th>
+              <th>Unidade</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {residents.map((u: any) => (
+              <tr key={u.id}>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="ru-avatar" style={{ background: '#ffe4e6', color: '#be123c' }}>
+                      {u.name
+                        .split(' ')
+                        .map((w: string) => w[0])
+                        .slice(0, 2)
+                        .join('')}
+                    </div>
+                    <div className="font-semibold text-ink-900">{u.name}</div>
+                  </div>
+                </td>
+                <td className="text-ink-600">
+                  <div>{u.email}</div>
+                  <div className="text-xs">{u.phone ?? '—'}</div>
+                </td>
+                <td>
+                  {u.unit ? (
+                    <code className="font-mono text-[12.5px]">
+                      {u.unit.block ? `${u.unit.block}-` : ''}
+                      {u.unit.number}
+                    </code>
+                  ) : (
+                    <span className="text-ink-500">sem unidade</span>
+                  )}
+                </td>
+                <td>
+                  <span className={`ru-badge ${u.active ? 'ru-badge-success' : 'ru-badge'}`}>
+                    {u.active ? 'Ativo' : 'Inativo'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+            {!residents.length && (
+              <tr>
+                <td colSpan={4} className="text-center py-8 text-ink-500">
+                  Nenhum morador cadastrado.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

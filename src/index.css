@@ -9,30 +9,117 @@
     height: 100%;
   }
   body {
-    @apply bg-bg text-ink font-sans antialiased;
+    @apply bg-bg text-ink-800 font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
   }
 }
 
 @layer components {
-  .card {
-    @apply bg-panel border border-border rounded-2xl shadow-card;
+  .ru-card {
+    @apply bg-surface border border-border rounded-lg shadow-sm;
   }
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors;
+  .ru-card-raised {
+    @apply bg-surface border border-border rounded-lg shadow-md;
   }
-  .btn-primary {
-    @apply btn bg-accent text-white hover:bg-accentHover;
+  .ru-btn {
+    @apply inline-flex items-center justify-center gap-2 font-display font-semibold text-sm h-10 px-4 rounded-md border border-transparent transition-all whitespace-nowrap;
   }
-  .btn-ghost {
-    @apply btn bg-transparent text-ink hover:bg-panel2 border border-border;
+  .ru-btn:focus-visible {
+    @apply outline-none shadow-focus;
   }
-  .input {
-    @apply w-full rounded-xl bg-panel2 border border-border px-3 py-2 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent;
+  .ru-btn-primary {
+    @apply ru-btn bg-primary-600 text-white shadow-sm hover:bg-primary-700 hover:-translate-y-px;
   }
-  .label {
-    @apply text-xs uppercase tracking-wider text-muted font-medium;
+  .ru-btn-secondary {
+    @apply ru-btn bg-surface text-ink-900 border-borderStrong shadow-xs hover:bg-surface2;
   }
-  .chip {
-    @apply inline-flex items-center gap-1 rounded-full border border-border bg-panel2 px-2.5 py-1 text-xs font-medium;
+  .ru-btn-ghost {
+    @apply ru-btn bg-transparent text-ink-800 hover:bg-surface2;
+  }
+  .ru-btn-danger {
+    @apply ru-btn bg-danger text-white shadow-sm;
+  }
+  .ru-btn-sm {
+    @apply h-8 px-3 text-[13px] rounded-sm;
+  }
+  .ru-input {
+    @apply w-full h-[42px] px-[14px] bg-surface border border-borderStrong rounded-md text-sm text-ink-900 transition-all placeholder:text-ink-500 focus:outline-none focus:border-primary-500 focus:shadow-focus hover:border-ink-400;
+  }
+  .ru-label {
+    @apply text-[13px] font-medium text-ink-800 font-display;
+  }
+  .ru-overline {
+    @apply text-[11px] leading-tight font-semibold tracking-[0.08em] uppercase text-ink-500;
+  }
+  .ru-caption {
+    @apply text-xs leading-snug text-ink-600 tracking-[0.01em];
+  }
+  .ru-h1 {
+    @apply font-display text-2xl font-bold text-ink-900 tracking-tight;
+  }
+  .ru-h2 {
+    @apply font-display text-xl font-semibold text-ink-900;
+  }
+  .ru-h3 {
+    @apply font-display text-[17px] font-semibold text-ink-900;
+  }
+  .ru-display {
+    @apply font-display text-[30px] leading-[1.15] font-bold text-ink-900 tracking-tight;
+  }
+  .ru-display-lg {
+    @apply font-display text-[40px] leading-[1.1] font-bold text-ink-900 tracking-tight;
+  }
+  .ru-badge {
+    @apply inline-flex items-center gap-1.5 font-display text-xs font-semibold h-6 px-2.5 rounded-full bg-surface2 text-ink-800 border border-border;
+  }
+  .ru-badge-success {
+    @apply bg-successBg text-success border-transparent;
+  }
+  .ru-badge-warning {
+    @apply bg-warningBg text-warning border-transparent;
+  }
+  .ru-badge-danger {
+    @apply bg-dangerBg text-danger border-transparent;
+  }
+  .ru-badge-info {
+    @apply bg-infoBg text-info border-transparent;
+  }
+  .ru-badge-primary {
+    @apply bg-primary-50 text-primary-700 border-transparent;
+  }
+  .ru-chip {
+    @apply inline-flex items-center gap-1.5 font-display text-[12.5px] font-semibold border border-border bg-surface px-3 py-[5px] rounded-full text-ink-700 cursor-pointer transition-all hover:border-ink-400;
+  }
+  .ru-chip-active {
+    @apply bg-ink-900 text-bg border-ink-900;
+  }
+  .icon-btn {
+    @apply relative inline-grid place-items-center w-8 h-8 rounded-sm border border-border bg-transparent text-ink-700 cursor-pointer transition-all hover:bg-surface2;
+  }
+  .ru-table {
+    @apply w-full border-collapse text-sm;
+  }
+  .ru-table th {
+    @apply text-left font-display text-[12px] font-semibold text-ink-600 uppercase tracking-[0.06em] px-[14px] py-[10px] bg-surface2 border-b border-border;
+  }
+  .ru-table td {
+    @apply px-[14px] py-[14px] border-b border-border text-ink-800 align-middle;
+  }
+  .ru-table tr:last-child td {
+    @apply border-b-0;
+  }
+  .ru-table tbody tr:hover td {
+    @apply bg-surface2;
+  }
+  .ru-avatar {
+    @apply inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary-100 text-primary-700 font-display font-semibold text-[13px] flex-shrink-0;
+  }
+  .sidebar-item {
+    @apply flex items-center gap-2.5 px-2.5 py-2 rounded-sm text-[13px] font-medium text-ink-700 cursor-pointer w-full text-left transition-all hover:bg-surface2 hover:text-ink-900;
+  }
+  .sidebar-item-active {
+    @apply bg-primary-50 text-primary-700 font-semibold;
   }
 }

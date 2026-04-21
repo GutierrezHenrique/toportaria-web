@@ -7,29 +7,37 @@ export default function AccessLogs() {
     queryFn: async () => (await api.get('/access-logs')).data,
   });
   return (
-    <div>
-      <h1 className="font-display text-3xl mb-6">Logs de acesso</h1>
-      <div className="card overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-panel2 text-muted text-xs uppercase">
+    <div className="flex flex-col gap-5">
+      <div>
+        <div className="ru-display">Auditoria</div>
+        <div className="text-ink-600 mt-1">Histórico completo de entradas e saídas.</div>
+      </div>
+
+      <div className="ru-card overflow-hidden">
+        <table className="ru-table">
+          <thead>
             <tr>
-              <th className="text-left p-3">Data</th>
-              <th className="text-left p-3">Tipo</th>
-              <th className="text-left p-3">Sujeito</th>
-              <th className="text-left p-3">Nota</th>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th>Sujeito</th>
+              <th>Observação</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody>
             {(logs.data ?? []).map((l: any) => (
               <tr key={l.id}>
-                <td className="p-3 text-muted">{new Date(l.createdAt).toLocaleString('pt-BR')}</td>
-                <td className="p-3">
-                  <span className={`chip ${l.type === 'ENTRY' ? 'text-ok' : 'text-accent'}`}>
+                <td className="text-ink-600">{new Date(l.createdAt).toLocaleString('pt-BR')}</td>
+                <td>
+                  <span
+                    className={`ru-badge ${
+                      l.type === 'ENTRY' ? 'ru-badge-success' : 'ru-badge-warning'
+                    }`}
+                  >
                     {l.type === 'ENTRY' ? 'Entrada' : 'Saída'}
                   </span>
                 </td>
-                <td className="p-3">{l.subject}</td>
-                <td className="p-3 text-muted">{l.note ?? '—'}</td>
+                <td className="font-medium text-ink-900">{l.subject}</td>
+                <td className="text-ink-600">{l.note ?? '—'}</td>
               </tr>
             ))}
           </tbody>
